@@ -4,22 +4,22 @@ import './formStyle.css';
 const ProtokolZniszczenia = () => {
   const [products, setProducts] = useState([
     {
-      kodTowaru: '',
-      nazwaTowaru: '',
-      jednEwidencyjna: '',
-      ilosc: '',
-      cenaJedn: '',
-      przyczynaZnisz: '',
+      barcode: '',
+      productName: '',
+      unit: '',
+      amount: '',
+      unitPrice: '',
+      utilizationCause: '',
     },
   ]);
 
   const [formDaneSklepu, setFormDaneSklepu] = useState({
-    data: '',
-    nrDokumentuZakupu: '',
-    dataDokumentuZakupu: '',
-    czlonek1: '',
-    czlonek2: '',
-    czlonek3: '',
+    date: '',
+    invoiceNumber: '',
+    invoicePurchaseDate: '',
+    member1: '',
+    member2: '',
+    member3: '',
   });
 
   const handleProductInputChange = (index, event) => {
@@ -44,30 +44,30 @@ const ProtokolZniszczenia = () => {
   };
 
   const generateDocument = () => {
-    const { data, nrDokumentuZakupu, dataDokumentuZakupu, czlonek1, czlonek2, czlonek3, sposZnisz } = formDaneSklepu;
+    const { date, invoiceNumber, invoicePurchaseDate, member1, member2, member3, sposZnisz } = formDaneSklepu;
   
     let productRows = '';
   
-    let kodTowaru, nazwaTowaru, jednEwidencyjna, ilosc, cenaJedn, wartoscOgraniczona, przyczynaZnisz;
+    let barcode, productName, unit, amount, unitPrice, wartoscOgraniczona, utilizationCause;
   
     products.forEach((product, index) => {
-      kodTowaru = product.kodTowaru;
-      nazwaTowaru = product.nazwaTowaru;
-      jednEwidencyjna = product.jednEwidencyjna;
-      ilosc = product.ilosc;
-      cenaJedn = product.cenaJedn;
-      wartoscOgraniczona = (ilosc * cenaJedn).toFixed(2);
-      przyczynaZnisz = product.przyczynaZnisz;
+      barcode = product.barcode;
+      productName = product.productName;
+      unit = product.unit;
+      amount = product.amount;
+      unitPrice = product.unitPrice;
+      wartoscOgraniczona = (amount * unitPrice).toFixed(2);
+      utilizationCause = product.utilizationCause;
   
       productRows += `
         <tr key=${index + 1}>
-          <td>${kodTowaru}</td>
-          <td>${nazwaTowaru}</td>
-          <td>${jednEwidencyjna}</td>
-          <td>${ilosc}</td>
-          <td>${cenaJedn}</td>
+          <td>${barcode}</td>
+          <td>${productName}</td>
+          <td>${unit}</td>
+          <td>${amount}</td>
+          <td>${unitPrice}</td>
           <td>${wartoscOgraniczona} zł</td>
-          <td>${przyczynaZnisz}</td>
+          <td>${utilizationCause}</td>
         </tr>
       `;
     });
@@ -97,19 +97,19 @@ const ProtokolZniszczenia = () => {
               <p>ADRES: <p style="font-style: italic; background-color: lightgray;"> ${oddzialAdres} </p></p><br>
           </div>
           <div class="date">
-              <p>DNIA: <p style="font-style: italic;"> ${data} </p></p>
+              <p>DNIA: <p style="font-style: italic;"> ${date} </p></p>
           </div>
           <div class="protocol-number">
               <p>PROTOKÓŁ ZNISZCZENIA</p>
           </div>
           <div class="protocol-content">
-              <p>DO DOKUMENTU ZAKUPU NR: <p style="font-style: italic; background-color: lightgray;"> ${nrDokumentuZakupu}</p>,</p> <p>Z DNIA: <p style="font-style: italic; background-color: lightgray">${dataDokumentuZakupu}</p></p><br>
+              <p>DO DOKUMENTU ZAKUPU NR: <p style="font-style: italic; background-color: lightgray;"> ${invoiceNumber}</p>,</p> <p>Z DNIA: <p style="font-style: italic; background-color: lightgray">${invoicePurchaseDate}</p></p><br>
           </div>
           <div class="comitmee-members">
-              <p style="font-size: 13px;">W dniu ${data} komisja w składzie: </p>
-              <p style="font-size: 13px; font-style: italic; background-color: lightgray;">1. ${czlonek1}</p>
-              <p style="font-size: 13px; font-style: italic; background-color: lightgray;">2. ${czlonek2}</p>
-              <p style="font-size: 13px; font-style: italic; background-color: lightgray;">3. ${czlonek3}</p>
+              <p style="font-size: 13px;">W dniu ${date} komisja w składzie: </p>
+              <p style="font-size: 13px; font-style: italic; background-color: lightgray;">1. ${member1}</p>
+              <p style="font-size: 13px; font-style: italic; background-color: lightgray;">2. ${member2}</p>
+              <p style="font-size: 13px; font-style: italic; background-color: lightgray;">3. ${member3}</p>
               <p style="font-size: 13px;">dokonała trwałego zniszczenia rzeczy:</p>
           </div>
           <div class="protocol-table">
@@ -123,13 +123,13 @@ const ProtokolZniszczenia = () => {
               <div class="div7">Wartość</div>
               <div class="div8">Przyczyna zniszczenia</div>
               <div class="div9">1.</div>
-              <div class="div10">${kodTowaru}</div>
-              <div class="div11">${nazwaTowaru}</div>
-              <div class="div12">${jednEwidencyjna}</div>
-              <div class="div13">${ilosc}</div>
-              <div class="div14">${cenaJedn} zł</div>
+              <div class="div10">${barcode}</div>
+              <div class="div11">${productName}</div>
+              <div class="div12">${unit}</div>
+              <div class="div13">${amount}</div>
+              <div class="div14">${unitPrice} zł</div>
               <div class="div15">${wartoscOgraniczona} zł</div>
-              <div class="div16">${przyczynaZnisz}</div>
+              <div class="div16">${utilizationCause}</div>
           </div>
       </div>
           <div class="utilization-way">
@@ -166,18 +166,18 @@ const ProtokolZniszczenia = () => {
             <div className="inputBox">
               <input
                 type="date"
-                name="data"
-                value={formDaneSklepu.data}
+                name="date"
+                value={formDaneSklepu.date}
                 onChange={handleFormDaneSklepuChange}
                 required
               />
-              <span>Data</span>
+              <span>date</span>
             </div>
 
             <div className="inputBox">
               <input
                 type="text"
-                name="nrDokumentuZakupu"
+                name="invoiceNumber"
                 value={formDaneSklepu.nrProtokolu}
                 onChange={handleFormDaneSklepuChange}
                 required
@@ -188,18 +188,18 @@ const ProtokolZniszczenia = () => {
             <div className="inputBox">
               <input
                 type="date"
-                name="dataDokumentuZakupu"
+                name="invoicePurchaseDate"
                 value={formDaneSklepu.nrProtokolu}
                 onChange={handleFormDaneSklepuChange}
                 required
               />
-              <span>Data zakupu</span>
+              <span>date zakupu</span>
             </div>
 
             <div className="inputBox">
               <input
                 type="text"
-                name="czlonek1"
+                name="member1"
                 value={formDaneSklepu.nrProtokolu}
                 onChange={handleFormDaneSklepuChange}
                 required
@@ -210,7 +210,7 @@ const ProtokolZniszczenia = () => {
             <div className="inputBox">
               <input
                 type="text"
-                name="czlonek2"
+                name="member2"
                 value={formDaneSklepu.nrProtokolu}
                 onChange={handleFormDaneSklepuChange}
                 required
@@ -221,7 +221,7 @@ const ProtokolZniszczenia = () => {
             <div className="inputBox">
               <input
                 type="text"
-                name="czlonek3"
+                name="member3"
                 value={formDaneSklepu.nrProtokolu}
                 onChange={handleFormDaneSklepuChange}
                 required
@@ -248,8 +248,8 @@ const ProtokolZniszczenia = () => {
               <div className="inputBox">
                 <input
                   type="number"
-                  name="kodTowaru"
-                  value={product.kodTowaru || ''}
+                  name="barcode"
+                  value={product.barcode || ''}
                   onChange={(e) => handleProductInputChange(index, e)}
                   required
                 />
@@ -259,8 +259,8 @@ const ProtokolZniszczenia = () => {
               <div className="inputBox">
                 <input
                   type="text"
-                  name="nazwaTowaru"
-                  value={product.nazwaTowaru || ''}
+                  name="productName"
+                  value={product.productName || ''}
                   onChange={(e) => handleProductInputChange(index, e)}
                   required
                 />
@@ -269,9 +269,9 @@ const ProtokolZniszczenia = () => {
 
               <div className="inputBox">
                 <select
-                  name="jednEwidencyjna"
+                  name="unit"
                   onChange={(e) => handleProductInputChange(index, e)}
-                  value={product.jednEwidencyjna || ''}
+                  value={product.unit || ''}
                   required
                 >
                   <option hidden selected>Wybierz jednostkę</option>
@@ -287,8 +287,8 @@ const ProtokolZniszczenia = () => {
           <div className="inputBox">
             <input
               type="number"
-              name="ilosc"
-              value={product.ilosc || ''}
+              name="amount"
+              value={product.amount || ''}
               onChange={(e) => handleProductInputChange(index, e)}
               required
             />
@@ -298,8 +298,8 @@ const ProtokolZniszczenia = () => {
           <div className="inputBox">
             <input
               type="number"
-              name="cenaJedn"
-              value={product.cenaJedn || ''}
+              name="unitPrice"
+              value={product.unitPrice || ''}
               onChange={(e) => handleProductInputChange(index, e)}
               required
             />
@@ -309,8 +309,8 @@ const ProtokolZniszczenia = () => {
           <div className="inputBox">
             <input
               type="text"
-              name="przyczynaZnisz"
-              value={product.przyczynaZnisz || ''}
+              name="utilizationCause"
+              value={product.utilizationCause || ''}
               onChange={(e) => handleProductInputChange(index, e)}
               required
             />
